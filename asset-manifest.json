@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/abhisheknannuri.github.io/static/css/main.6ced536d.css",
+    "main.js": "/abhisheknannuri.github.io/static/js/main.978f8eb6.js",
+    "static/js/488.f1ad4097.chunk.js": "/abhisheknannuri.github.io/static/js/488.f1ad4097.chunk.js",
+    "index.html": "/abhisheknannuri.github.io/index.html",
+    "main.6ced536d.css.map": "/abhisheknannuri.github.io/static/css/main.6ced536d.css.map",
+    "main.978f8eb6.js.map": "/abhisheknannuri.github.io/static/js/main.978f8eb6.js.map",
+    "488.f1ad4097.chunk.js.map": "/abhisheknannuri.github.io/static/js/488.f1ad4097.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6ced536d.css",
+    "static/js/main.978f8eb6.js"
+  ]
+}
