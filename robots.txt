@@ -1,5 +1,0 @@
-# https://www.robotstxt.org/robotstxt.html
-User-agent: *
-Allow: /
-Sitemap: https://abhi-0212000.github.io/abhisheknannuri/sitemap.xml
-Disallow:
