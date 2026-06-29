@@ -1,0 +1,44 @@
+/* Professional Universe Specific Style System */
+
+.pro-universe {
+  /* Light Theme Defaults for Pro Space */
+  --brand-bg: #fafafa;
+  --brand-card: #ffffff;
+  --brand-accent: #059669;
+  --brand-accent-glow: rgba(5, 150, 105, 0.08);
+  --brand-text-muted: #52525b;
+  --brand-text-main: #09090b;
+  --brand-border: #e4e4e7;
+}
+
+.dark .pro-universe, .pro-universe.dark {
+  /* Dark Theme Defaults for Pro Space */
+  --brand-bg: #09090b;
+  --brand-card: #18181b;
+  --brand-accent: #10b981;
+  --brand-accent-glow: rgba(16, 185, 129, 0.15);
+  --brand-text-muted: #a1a1aa;
+  --brand-text-main: #f4f4f5;
+  --brand-border: #27272a;
+}
+
+/* Blueprint-like grids */
+.pro-universe .blueprint-grid {
+  background-image: radial-gradient(var(--brand-accent) 0.8px, transparent 0.8px);
+  background-size: 24px 24px;
+}
+
+.pro-universe .blueprint-grid-light {
+  background-image: radial-gradient(var(--brand-accent) 0.5px, transparent 0.5px);
+  background-size: 16px 16px;
+}
+
+/* Technical professional transitions */
+.pro-universe .pro-card-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pro-universe .pro-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.1);
+  border-color: var(--brand-accent);
+}

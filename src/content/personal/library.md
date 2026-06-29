@@ -1,0 +1,23 @@
+---
+books:
+  - id: "book-1"
+    title: "1984"
+    author: "George Orwell"
+    category: "SOCIOLOGY_CORE"
+    tagColor: "bg-red-100 dark:bg-red-950/40 text-red-600 dark:text-red-400 border-red-200 dark:border-red-800/40"
+    quote: "A manual or a warning?"
+    desc: "Exposes how easily systematic structures can manipulate language to erase collective truth. Reminds us to guard and defend factual logic at all times."
+    image: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=600&auto=format&fit=crop"
+    rotation: "-rotate-2"
+    cardBg: "bg-[#FFFDF4] dark:bg-[#1C1814] border-red-300 dark:border-red-950/40"
+  - id: "book-2"
+    title: "Beyond Good and Evil"
+    author: "Friedrich Nietzsche"
+    category: "PHILOSOPHY_CORE"
+    tagColor: "bg-indigo-100 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-800/40"
+    quote: "Deep dive."
+    desc: "A complete and ruthless re-evaluation of social dogmas. It challenges us to look beyond simplistic binary ethics and craft authentic individual values."
+    image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=600&auto=format&fit=crop"
+    rotation: "rotate-2"
+    cardBg: "bg-[#FFFDF4] dark:bg-[#14141E] border-indigo-300 dark:border-indigo-950/40"
+---

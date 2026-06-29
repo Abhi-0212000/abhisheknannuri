@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Security rules for blog comments
+    match /comments/{commentId} {
+      
+      // Allow anyone to view comments
+      allow read: if true;
+      
+      // Allow anyone to create comments, but enforce strict schema and size validations
+      allow create: if 
+        // Enforce required fields
+        request.resource.data.keys().hasAll(['author', 'text', 'noteId', 'createdAt']) &&
+        // Verify author is a non-empty string and less than 50 characters
+        request.resource.data.author is string &&
+        request.resource.data.author.trim().size() > 0 &&
+        request.resource.data.author.size() < 50 &&
+        // Verify text is a non-empty string and less than 1000 characters (spam prevention)
+        request.resource.data.text is string &&
+        request.resource.data.text.trim().size() > 0 &&
+        request.resource.data.text.size() < 1000 &&
+        // Verify noteId is a string and valid slug
+        request.resource.data.noteId is string &&
+        request.resource.data.noteId.size() > 0 &&
+        request.resource.data.noteId.size() < 100 &&
+        // Enforce server-side timestamp mapping for integrity
+        request.resource.data.createdAt is timestamp &&
+        request.resource.data.createdAt == request.time;
+        
+      // Explicitly forbid updating or deleting comments to prevent malicious overrides
+      allow update, delete: if false;
+    }
+  }
+}
