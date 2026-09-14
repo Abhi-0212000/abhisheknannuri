@@ -37,9 +37,10 @@ infrastructure that ships it to a factory floor. I've built at each layer, which
 means I'm not guessing at either end.
 
 It's the journey I'm most proud of. People will tell you to specialise: pick one
-thing, go deep. I've come to disagree. What I want is the whole pipeline at
-mid-depth, because that's what tells me which part of the system a problem
-actually lives in.
+thing, go deep. I've come to disagree — narrowing early is a riskier bet than it
+used to be, and the field moves too fast for one deep slice to stay the valuable
+one. What I want is the whole pipeline at mid-depth, because that's what tells me
+which part of the system a problem actually lives in.
 
 And going deep isn't the expensive part any more — depth is far cheaper to
 acquire than it used to be. Having the range to know where to dig, and to tell
