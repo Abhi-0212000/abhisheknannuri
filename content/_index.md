@@ -36,15 +36,14 @@ without the pipeline that trains it, the middleware that runs it, and the
 infrastructure that ships it to a factory floor. I've built at each layer, which
 means I'm not guessing at either end.
 
-That route is the part of my background I'm most proud of, and by now it's a
-deliberate bet. The usual advice is to go deep on one thing. I think that's the
-wrong shape for robotics right now: a robot is an end-to-end system, and the
-expensive failures happen at the seams between specialisms rather than inside
-any one of them — a controller that returns before the arm has moved, a reward
-model that never saw a failure case. Knowing the whole pipeline to a working
-depth is what lets you see those seams at all. And when something genuinely
-needs depth, that's a few focused weeks now, not a career change — provided you
-know enough to ask the right question and judge the answer you get back.
+It's the journey I'm most proud of. People will tell you to specialise: pick one
+thing, go deep. I've come to disagree. What I want is the whole pipeline at
+mid-depth, because that's what tells me which part of the system a problem
+actually lives in.
+
+And going deep isn't the expensive part any more — depth is far cheaper to
+acquire than it used to be. Having the range to know where to dig, and to tell
+when an answer is wrong, is the part you still have to build yourself.
 
 I'd also rather change fifteen files and get the structure right than add one
 more function to the wrong place like patch work. There is no perfect
