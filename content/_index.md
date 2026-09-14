@@ -36,8 +36,23 @@ without the pipeline that trains it, the middleware that runs it, and the
 infrastructure that ships it to a factory floor. I've built at each layer, which
 means I'm not guessing at either end.
 
+That route is the part of my background I'm most proud of, and by now it's a
+deliberate bet. The usual advice is to go deep on one thing. I think that's the
+wrong shape for robotics right now: a robot is an end-to-end system, and the
+expensive failures happen at the seams between specialisms rather than inside
+any one of them — a controller that returns before the arm has moved, a reward
+model that never saw a failure case. Knowing the whole pipeline to a working
+depth is what lets you see those seams at all. And when something genuinely
+needs depth, that's a few focused weeks now, not a career change — provided you
+know enough to ask the right question and judge the answer you get back.
+
 I'd also rather change fifteen files and get the structure right than add one
-more function to the wrong place. Worth knowing before you hire me.
+more function to the wrong place like patch work. There is no perfect
+architecture. The one that looks clean today will meet a case it was never
+designed for, and the honest response is to change it rather than paper over it.
+A patch keeps the diff small and the design rigid, and that trade compounds
+badly — the larger the codebase grows, the more tempting the patch becomes and
+the more it eventually costs. Worth knowing before you hire me.
 
 I keep [technical notes](notes/) on the algorithms I work with, built around the
 architecture diagrams I drew for my thesis.
@@ -67,9 +82,13 @@ and full-task reliability is still in progress.
 {{< clip src="residual-rl" pixelated="true"
         caption="After residual RL: longer horizons, and it recovers when it slips." >}}
 
-**What I built.** The teleoperation pipeline, with real leader arms driving
-simulated followers so demonstrations move like a human. The Trossen
-client–server policy server. The sim → Trossen → Franka validation protocol. And
+**What I built.** I've worked the pipeline end to end: teleoperation rigs with
+real leader arms driving simulated followers so demonstrations move like a human;
+data collection and stage annotation; training the base policies (VLA, ACT,
+diffusion); iterative training, where rollouts from the current policy are scored
+and fed back in to improve the next one; and then residual RL on top of that
+base. Also the Trossen client–server policy server, and the
+sim → Trossen → Franka validation protocol. And
 I adapted TD3-BC to a residual action space, which hadn't been done — the
 regularisation weight in the paper is scaled for full actions, so I re-derived
 it and bounded the correction.
