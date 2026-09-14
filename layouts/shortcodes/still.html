@@ -1,5 +1,15 @@
+{{- /*
+  A still figure from static/media. `src` may include an extension; without
+  one it defaults to .png, which is what the diagram exports are.
+
+    {{< still src="sidewalk-nav" alt="..." caption="..." >}}
+    {{< still src="multilayer-map.jpg" alt="..." caption="..." >}}
+*/ -}}
 {{- $src := .Get "src" -}}
+{{- if not (strings.Contains $src ".") -}}
+  {{- $src = printf "%s.png" $src -}}
+{{- end -}}
 <figure>
-  <img src="{{ printf "media/%s.png" $src | relURL }}" alt="{{ .Get "alt" }}" loading="lazy" />
+  <img src="{{ printf "media/%s" $src | relURL }}" alt="{{ .Get "alt" }}" loading="lazy" />
   {{- with .Get "caption" }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
 </figure>

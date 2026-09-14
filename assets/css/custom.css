@@ -22,9 +22,14 @@
   background: rgb(255 255 255 / 0.04);
 }
 
-/* The 256x256 robot clips: keep them crisp instead of letting the
-   browser's upscaler smear them. */
-.content video.pixelated { image-rendering: pixelated; }
+/* The robot clips are 256x256 at source — that is the capture resolution,
+   not a compression artefact. Nearest-neighbour upscaling only makes the
+   blocks harder; smooth scaling reads better on camera footage. Cap the
+   display width instead so they are barely enlarged at all. */
+.content video.pixelated {
+  max-width: 20rem;
+  margin-inline: auto;
+}
 
 .content figcaption {
   font-size: 0.8125rem;
@@ -88,3 +93,35 @@
 }
 
 .content h3 { margin-top: 2.25rem; }
+
+/* ── Facts block ───────────────────────────────────────────────────
+   The scannable summary under the hero. A markdown table would need a
+   header row that has nothing to say, so this is a definition list. */
+
+.content .facts {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 0.5rem 1.25rem;
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid rgb(0 0 0 / 0.1);
+  border-radius: 6px;
+  font-size: 0.9375rem;
+}
+.dark .content .facts { border-color: rgb(255 255 255 / 0.12); }
+
+.content .facts dt {
+  font-weight: 600;
+  opacity: 0.65;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  align-self: start;   /* keep the label level with the first line of its value */
+  padding-top: 0.2rem;
+}
+.content .facts dd { margin: 0; }
+
+@media (max-width: 32rem) {
+  .content .facts { grid-template-columns: 1fr; gap: 0.15rem; }
+  .content .facts dd { margin-bottom: 0.6rem; }
+}

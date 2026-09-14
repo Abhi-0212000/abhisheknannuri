@@ -19,6 +19,14 @@ markup:
   goldmark:
     renderer:
       unsafe: true          # raw HTML in content, for the video figures
+    extensions:
+      # KaTeX in the notes. Hextra only loads the engine on pages that
+      # actually contain math, via a Goldmark passthrough hook.
+      passthrough:
+        enable: true
+        delimiters:
+          block: [["\\[", "\\]"], ["$$", "$$"]]
+          inline: [["\\(", "\\)"], ["$", "$"]]
   highlight:
     noClasses: false
     lineNos: false
