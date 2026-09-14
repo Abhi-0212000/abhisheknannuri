@@ -1,10 +1,4 @@
-node_modules/
-build/
-dist/
-coverage/
-.DS_Store
-*.log
-.env*
-!.env.example
-firebase.md
-*.docx
+public/
+resources/
+.hugo_build.lock
+.env

@@ -1,0 +1,90 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Overrides on top of Hextra. Kept small and additive so the theme can
+   be updated without merge pain.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Media figures (homepage) ──────────────────────────────────────── */
+
+.content figure { margin: 2rem 0; }
+
+.content figure video,
+.content figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.content figure video {
+  background: rgb(0 0 0 / 0.04);
+}
+.dark .content figure video {
+  background: rgb(255 255 255 / 0.04);
+}
+
+/* The 256x256 robot clips: keep them crisp instead of letting the
+   browser's upscaler smear them. */
+.content video.pixelated { image-rendering: pixelated; }
+
+.content figcaption {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  margin-top: 0.5rem;
+  color: rgb(107 114 128);
+}
+.dark .content figcaption { color: rgb(156 163 175); }
+
+.figure-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+.figure-pair figure { margin: 0; }
+
+@media (max-width: 46rem) {
+  .figure-pair { grid-template-columns: 1fr; }
+}
+
+/* ── Thesis diagrams ───────────────────────────────────────────────── */
+
+/* These are line drawings made for white paper. Rather than recolouring
+   them per theme — which never survives contact with a 20-colour TikZ
+   figure — they keep their own light plate in both themes. */
+.diagram { margin: 2rem 0; }
+
+.diagram-plate {
+  background: #ffffff;
+  border: 1px solid rgb(0 0 0 / 0.1);
+  border-radius: 4px;
+  padding: 1.25rem;
+  overflow-x: auto;      /* wide diagrams scroll rather than shrink */
+}
+.dark .diagram-plate { border-color: rgb(255 255 255 / 0.12); }
+
+.diagram-plate img {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 0;
+}
+
+.diagram-credit {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+/* ── Typography ────────────────────────────────────────────────────── */
+
+/* Slightly roomier prose than Hextra's default — these pages are read,
+   not skimmed. */
+.content p { line-height: 1.7; }
+
+.content h2 {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+}
+
+.content h3 { margin-top: 2.25rem; }

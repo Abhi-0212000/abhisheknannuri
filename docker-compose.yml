@@ -1,0 +1,44 @@
+# One-time setup, then two commands:
+#
+#   printf 'HOST_UID=%s\nHOST_GID=%s\n' "$(id -u)" "$(id -g)" > .env
+#
+#   docker compose up serve          live preview on http://localhost:1313
+#   docker compose run --rm build    write ./public for deployment
+
+# Both services are the same image with a different command, so the shared
+# settings live here and each service just points at them.
+x-hugo: &hugo
+  build:
+    context: .
+    args:
+      HUGO_VERSION: "0.166.0"
+  image: abhisheknannuri-hugo:0.166.0
+
+  # Hugo writes public/ and resources/ straight into the bind mount. Running as
+  # root would leave those root-owned in your working tree, and a later native
+  # `hugo` run could not overwrite them. HOST_UID/HOST_GID come from .env.
+  user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+
+  environment:
+    # That uid has no passwd entry in the image, so $HOME is unset. Point
+    # Hugo's cache somewhere writable instead of letting it guess.
+    HUGO_CACHEDIR: /tmp/hugo_cache
+
+  # Hugo binds straight onto the host interface — no port mapping to keep in
+  # sync with the --port flag.
+  network_mode: host
+
+  volumes:
+    - .:/src
+
+services:
+  # serve: starts a live local web server so you can preview the site at
+  # http://localhost:1313 while you edit. Runs continuously and watches files.
+  serve:
+    <<: *hugo
+
+  # build: runs `hugo --minify` once, generating the final optimised
+  # HTML/CSS into ./public for deployment.
+  build:
+    <<: *hugo
+    command: hugo --minify

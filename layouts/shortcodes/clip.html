@@ -1,0 +1,25 @@
+{{- /*
+  A robot clip. Paths go through relURL so they survive the site moving to a
+  different baseURL (e.g. renaming the repo to abhi-0212000.github.io).
+
+    {{< clip src="ecu-assembly" caption="..." hero="true" pixelated="true" >}}
+
+  hero      autoplay + loop, for the one clip above the fold
+  pixelated for the 256x256 clips, so the upscaler doesn't smear them
+*/ -}}
+{{- $src := .Get "src" -}}
+{{- $caption := .Get "caption" | default "" -}}
+{{- $hero := eq (.Get "hero") "true" -}}
+{{- $pix := eq (.Get "pixelated") "true" -}}
+<figure>
+  <video
+    {{ if $hero }}autoplay {{ end }}loop muted playsinline controls
+    preload="{{ if $hero }}metadata{{ else }}none{{ end }}"
+    {{ if $pix }}class="pixelated" {{ end }}
+    poster="{{ printf "media/%s.jpg" $src | relURL }}">
+    <source src="{{ printf "media/%s.mp4" $src | relURL }}" type="video/mp4" />
+  </video>
+  {{- with $caption }}
+  <figcaption>{{ . | markdownify }}</figcaption>
+  {{- end }}
+</figure>

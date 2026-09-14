@@ -1,0 +1,19 @@
+{{- /*
+  Overrides Hugo's embedded twitter_cards partial, which Hextra calls from
+  head.html. The embedded one hardcodes card type "summary" — a small square
+  thumbnail. With a real preview image we want "summary_large_image", and
+  emitting a second card tag from head-end.html would just duplicate it.
+
+  Image resolution matches _partials/custom/head-end.html: a page can override
+  with `images: ["media/foo.jpg"]` in front matter.
+*/ -}}
+{{- $img := "" -}}
+{{- with .Params.images -}}
+  {{- $img = index . 0 | absURL -}}
+{{- else -}}
+  {{- $img = "media/ecu-assembly.jpg" | absURL -}}
+{{- end -}}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="{{ $img }}" />
+<meta name="twitter:title" content="{{ .Title | plainify }}" />
+<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary | plainify }}{{ else }}{{ with site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }} " />

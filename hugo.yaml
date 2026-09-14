@@ -1,0 +1,67 @@
+# Set to https://abhi-0212000.github.io/ if you rename the repo to
+# abhi-0212000.github.io (see README). Trailing slash matters.
+baseURL: https://abhi-0212000.github.io/abhisheknannuri/
+title: Abhishek Nannuri
+locale: en-gb
+theme: hextra
+
+enableRobotsTXT: true
+enableGitInfo: false
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true          # raw HTML in content, for the video figures
+  highlight:
+    noClasses: false
+    lineNos: false
+
+menu:
+  main:
+    - name: Notes
+      pageRef: /notes
+      weight: 1
+    - name: Publications
+      pageRef: /publications
+      weight: 2
+    - name: CV
+      url: /cv.pdf
+      weight: 3
+    - name: Search
+      weight: 8
+      params:
+        type: search
+    - name: GitHub
+      url: https://github.com/Abhi-0212000
+      weight: 9
+      params:
+        icon: github
+
+params:
+  description: >-
+    Robotics software engineer in Munich. Reinforcement learning for
+    manipulation, and the systems work that gets it onto real hardware.
+
+  navbar:
+    displayTitle: true
+    displayLogo: false
+
+  footer:
+    enable: true
+    displayCopyright: false
+    displayPoweredBy: false
+
+  theme:
+    default: system
+    displayToggle: true
+
+  page:
+    width: normal
+
+  editURL:
+    enable: false
+
+  highlight:
+    copy:
+      enable: true
+      display: hover

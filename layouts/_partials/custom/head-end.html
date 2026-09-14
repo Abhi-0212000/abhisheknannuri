@@ -1,0 +1,49 @@
+{{- /*
+  Hextra emits canonical, description, Open Graph and Twitter tags already.
+  Two things it leaves out that matter when a link is shared:
+
+    og:image   without it LinkedIn, Slack and Twitter render a blank card
+    JSON-LD    lets search engines tie the site to a person rather than
+               guessing from the markup
+
+  A page can override the preview image with `images: ["media/foo.jpg"]` in
+  its front matter.
+*/ -}}
+
+{{- $img := "" -}}
+{{- with .Params.images -}}
+  {{- $img = index . 0 | absURL -}}
+{{- else -}}
+  {{- $img = "media/ecu-assembly.jpg" | absURL -}}
+{{- end -}}
+
+{{/* Twitter tags live in _partials/twitter_cards.html, which overrides
+     Hugo's embedded one — emitting them here too would duplicate them. */}}
+<meta property="og:image" content="{{ $img }}" />
+<meta name="author" content="Abhishek Nannuri" />
+
+{{- if .IsHome }}
+<script type="application/ld+json">
+{{- dict
+  "@context" "https://schema.org"
+  "@type" "Person"
+  "name" "Abhishek Nannuri"
+  "url" site.BaseURL
+  "image" $img
+  "jobTitle" "Robotics Software Engineer"
+  "email" "mailto:abhishek.nannuri@outlook.com"
+  "address" (dict "@type" "PostalAddress" "addressLocality" "Munich" "addressCountry" "DE")
+  "knowsAbout" (slice
+    "Reinforcement learning"
+    "Robotic manipulation"
+    "ROS 2"
+    "Residual reinforcement learning"
+    "Vision-language-action models"
+    "Autonomous navigation")
+  "sameAs" (slice
+    "https://github.com/Abhi-0212000"
+    "https://www.linkedin.com/in/abhi-nannuri-02122000/")
+  | jsonify (dict "indent" "  ")
+}}
+</script>
+{{- end }}

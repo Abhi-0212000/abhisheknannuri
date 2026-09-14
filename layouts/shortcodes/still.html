@@ -1,0 +1,5 @@
+{{- $src := .Get "src" -}}
+<figure>
+  <img src="{{ printf "media/%s.png" $src | relURL }}" alt="{{ .Get "alt" }}" loading="lazy" />
+  {{- with .Get "caption" }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+</figure>

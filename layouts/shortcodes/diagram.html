@@ -1,0 +1,31 @@
+{{- /*
+  A thesis figure, rendered from TikZ to SVG.
+
+  These are line drawings made for white paper, so they keep their own light
+  plate in dark mode rather than being recoloured or glaring. Wide diagrams
+  scroll horizontally instead of shrinking to illegible.
+
+    {{< diagram src="chapter2_background/sac_arch_vertical.svg"
+                alt="..."
+                caption="..." >}}
+*/ -}}
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $caption := .Get "caption" | default "" -}}
+{{- $minw := .Get "minwidth" | default "34rem" -}}
+<figure class="diagram">
+  <div class="diagram-plate">
+    <img src="{{ printf "diagrams/%s" $src | relURL }}"
+         alt="{{ $alt }}"
+         loading="lazy"
+         style="min-width:{{ $minw }}" />
+  </div>
+  <figcaption>
+    {{- with $caption }}{{ . | markdownify }}{{ end }}
+    <span class="diagram-credit">
+      <a href="{{ printf "diagrams/%s" $src | relURL }}" target="_blank" rel="noopener">Open full size ↗</a>
+      · © Abhishek Nannuri ·
+      <a href="{{ "license/" | relURL }}">CC BY-NC 4.0</a>
+    </span>
+  </figcaption>
+</figure>
