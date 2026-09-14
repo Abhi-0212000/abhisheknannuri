@@ -8,6 +8,13 @@ theme: hextra
 enableRobotsTXT: true
 enableGitInfo: false
 
+# No posts are tagged or categorised, so Hugo was generating empty /tags/ and
+# /categories/ pages and listing them in the sitemap. Thin pages with nothing
+# on them are worth less than nothing to a search engine.
+disableKinds:
+  - taxonomy
+  - term
+
 markup:
   goldmark:
     renderer:
