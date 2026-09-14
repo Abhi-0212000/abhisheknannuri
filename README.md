@@ -18,6 +18,12 @@ docker compose run --rm build      # writes ./public
 First run builds the image (~40 s). After that it starts instantly. Stop the
 server with `Ctrl+C`, or `docker compose down`.
 
+**Do not run `serve` and `build` at the same time.** Both mount the same source
+tree and both write Hugo's `resources/` cache, so running them concurrently can
+leave a half-generated stylesheet — the page renders with no CSS and no error.
+If that happens: `docker compose down && rm -rf resources public`, then start
+one of them.
+
 Edits on the host are picked up live — the container polls the mount
 (`--poll 700ms`), because inotify events don't cross a bind mount reliably.
 

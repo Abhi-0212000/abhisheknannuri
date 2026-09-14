@@ -8,7 +8,7 @@ toc: false
 ---
 
 Robotics software engineer in Munich. I do reinforcement learning for
-manipulation at **BMW Next Generation Robotics**, and the systems work that gets
+manipulation and fine-tuning behavior-learning policies at **BMW Next Generation Robotics/Physical AI in Production**, and the systems work that gets
 it onto real hardware.
 
 [abhishek.nannuri@outlook.com](mailto:abhishek.nannuri@outlook.com) ·
@@ -19,23 +19,22 @@ it onto real hardware.
 {{< clip src="ecu-assembly" hero="true"
         caption="ECU assembly on a Franka dual-arm cell — one of the live production tasks I work on at BMW." >}}
 
-<dl class="facts">
-  <dt>Now</dt>
-  <dd>M.Eng thesis + working student, BMW Next Generation Robotics</dd>
-  <dt>Field</dt>
-  <dd>Residual RL and vision-based rewards for contact-rich manipulation</dd>
-  <dt>Result</dt>
-  <dd>Cube pick-and-insert 30% &rarr; near-perfect · ECU assembly running on a Franka dual-arm cell in production</dd>
-  <dt>Also</dt>
-  <dd>Two publications in autonomous navigation · C++/ROS&nbsp;2 · 2 years DevOps</dd>
-  <dt>Wants</dt>
-  <dd>Robot learning and foundation models for manipulation</dd>
-</dl>
+**Currently working on** improving behaviour-cloning policies — vision-language-action
+models, Action Chunking Transformers, diffusion policies — by learning a
+reinforcement-learning residual correction on top of them, and getting that to
+run on production hardware.
 
-I came to robot learning sideways — mechanical engineering, then two years as a
-DevOps engineer, then C++ and ROS 2 navigation research. The useful part of that
-route is range: I can take a policy from the reward function down to the
-container it ships in, and I'm not guessing at either end.
+## About me
+
+I came to robotics sideways — mechanical engineering, then two years as a DevOps
+engineer, then classical robotics: perception, localisation and path planning for
+autonomous mobile robots, and now Physical AI, improving learned policies with
+reinforcement learning and the software architecture around them. It's an
+unconventional route to robotics software engineering, but not a scattered one:
+a robot needs every one of those layers to work at once. The brain is useless
+without the pipeline that trains it, the middleware that runs it, and the
+infrastructure that ships it to a factory floor. I've built at each layer, which
+means I'm not guessing at either end.
 
 I'd also rather change fifteen files and get the structure right than add one
 more function to the wrong place. Worth knowing before you hire me.
@@ -45,9 +44,9 @@ architecture diagrams I drew for my thesis.
 
 ## Work
 
-### Residual RL for contact-rich manipulation
+### Residual RL on real hardware
 
-*Master's thesis · BMW Next Generation Robotics · 2025–present*
+*BMW Next Generation Robotics · working student · 2025–present*
 
 **Problem.** Behaviour cloning and vision-language-action policies learn a task
 from demonstrations, then plateau around 80%. The missing piece is contact-rich
@@ -78,20 +77,36 @@ it and bounded the correction.
 → [The residual training loop](notes/residual-rl/architecture/), with the
 architecture diagram.
 
-### Vision-based dense rewards
+### Do dense rewards actually help?
 
-*My own proposal · benchmarked in simulation, now adapting to real hardware*
+*Master's thesis · "Vision-Based Dense Rewards for Finetuning Manipulation
+Policies via Reinforcement Learning" · simulation study in Robosuite*
 
-RL on a real arm dies on sparse rewards. I proposed repurposing Temporal
-Cycle-Consistency — built to align video and audio — as a progress reward
-instead. An industrial task is a repeatable human procedure, so you can match
-the current observation against features from human demonstrations and read off
-task progress. Simpler than SARM, and it matched or beat it.
+Sparse rewards are supposed to be the thing that kills reinforcement learning on
+a real arm, so dense, vision-based reward models should help. I spent a thesis
+testing whether that's true, and the headline answer is **no — not where people
+assume it is.**
 
-I benchmarked five reward models against a stage-based ground truth on three
-splits: in-distribution, out-of-distribution, and non-monotonic runs with
-reversals. Stage-aware models track real progress; reward-only models get fooled
-by motion that never completes the task.
+**Reward models are not interchangeable.** I benchmarked five vision-based reward
+models — TCC, SARM, ROBOReward, ROBOMeter, TOPReward — on in-distribution,
+out-of-distribution and non-monotonic trajectories. Stage-aware models stayed
+robust and correctly registered stage *regressions*. The generalist
+vision-language models hallucinated reward on out-of-distribution motion,
+responding to visual change rather than task progress.
+
+**Reward-aligned behaviour cloning works, cheaply.** Weighting demonstration
+frames by task progress beat vanilla BC at every dataset size — 95.6% vs 87.6%
+success at 300 demonstrations. TCC matched the much heavier SARM while needing
+only 20 labelled episodes against roughly 100.
+
+**The negative result is the interesting one.** Inside residual RL, starting from
+a strong BC base (~85%), stage-aware potential-based shaping was *statistically
+indistinguishable from a sparse binary reward*. The dense signal bought nothing.
+Dense rewards likely pay off from weak or random policies — not from a good one.
+
+**And the failure mode was fixable.** Residual RL collapses early because uniform
+action scaling perturbs orientation along with translation. Per-dimension
+scaling, plus warming up actor *and* critic with TD3-BC, largely removes that dip.
 
 → [Benchmarking a reward model before you trust it](notes/reward-modelling/benchmarking/)
 
@@ -115,9 +130,9 @@ built a real-time waypoint correction module using depth and semantic
 segmentation — because OSM sidewalk geometry is wrong often enough that a
 map-following robot drifts toward the curb.
 
-Also in the same system: a quintic Bézier local planner with C2/G2 continuity,
-and DWA velocity profiling extended to respect the robot's kinematic and dynamic
-constraints.
+Also in the same system: a quintic Bézier local trajectory planner with C2/G2 (curvature) continuity,
+and Dynamic Window Approach (DWA) velocity profiling extended to respect the
+robot's kinematic and dynamic constraints.
 
 → [Publications](publications/)
 
