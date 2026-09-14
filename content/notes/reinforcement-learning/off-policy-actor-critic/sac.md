@@ -1,6 +1,6 @@
 ---
 title: SAC
-weight: 4
+weight: 3
 description: >-
   Soft Actor–Critic explained against its architecture diagram — the eight
   stages of one iteration, and what changes coming from TD3.
@@ -87,4 +87,4 @@ concern.
 - [TD3](../td3/) — where the twin critics and clipped double-$Q$ come from
 - [DDPG](../ddpg/) — the deterministic ancestor
 - [RLPD](../rlpd/) — SAC plus prior data
-- [The residual training loop](../../residual-rl/architecture/) — SAC/TD3 as a frozen base
+- [The residual training loop](../../../residual-rl/architecture/) — SAC/TD3 as a frozen base

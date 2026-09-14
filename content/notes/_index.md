@@ -21,8 +21,9 @@ when I implemented the thing.
 ## Sections
 
 {{< cards >}}
-  {{< card link="reinforcement-learning/" title="Reinforcement learning" subtitle="MDPs, DDPG, TD3, SAC, RLPD — the off-policy family I work in." >}}
-  {{< card link="reward-modelling/" title="Reward modelling" subtitle="Shaping, taxonomy of learned reward models, and how to benchmark them honestly." >}}
-  {{< card link="policy-architectures/" title="Policy architectures" subtitle="Action chunking, receding-horizon execution, and imitation baselines." >}}
+  {{< card link="reinforcement-learning/" title="Reinforcement learning" subtitle="MDPs, and the off-policy actor–critic family: DDPG, TD3, SAC, RLPD." >}}
+  {{< card link="offline-rl/" title="Offline RL" subtitle="Learning from a fixed dataset, and why extrapolation error is the hard part." >}}
+  {{< card link="reward-modelling/" title="Reward modelling" subtitle="Shaping, learned reward models, and how to benchmark one honestly." >}}
+  {{< card link="policy-architectures/" title="Policy architectures" subtitle="Action chunking, receding-horizon execution, imitation baselines." >}}
   {{< card link="residual-rl/" title="Residual RL" subtitle="Freezing a base policy and learning a bounded correction on top." >}}
 {{< /cards >}}
