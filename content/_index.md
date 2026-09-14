@@ -32,9 +32,10 @@ it onto real hardware.
   <dd>Robot learning and foundation models for manipulation</dd>
 </dl>
 
-I got here sideways: mechanical engineering, then two years as a DevOps
-engineer, then C++ and ROS 2 navigation research, then robot learning. It means
-I've written the Dockerfile and the reward function for the same system.
+I came to robot learning sideways — mechanical engineering, then two years as a
+DevOps engineer, then C++ and ROS 2 navigation research. The useful part of that
+route is range: I can take a policy from the reward function down to the
+container it ships in, and I'm not guessing at either end.
 
 I'd also rather change fifteen files and get the structure right than add one
 more function to the wrong place. Worth knowing before you hire me.
@@ -100,13 +101,9 @@ by motion that never completes the task.
 
 BMW's in-house robotics platform, built to replace a third-party stack. I worked
 across ROS 2 middleware, the HMI front and back end, IT/OT connectivity, CI/CD,
-Docker Compose orchestration, waypoint management and behaviour trees.
-
-Ahead of a management demo, the modules kept failing on the industrial PC.
-Reviewing pull requests, I found the connectivity layer making synchronous Kafka
-calls that blocked once all containers were under load. I re-architected it to
-asynchronous messaging overnight and defended the design to the software
-architect the next morning.
+Docker Compose orchestration, waypoint management and behaviour trees — and
+re-architected the connectivity layer from synchronous to asynchronous messaging
+to keep it stable under full container load on the industrial PC.
 
 ### Sidewalk navigation for last-mile delivery robots
 

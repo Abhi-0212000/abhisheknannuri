@@ -96,12 +96,16 @@
 
 /* ── Facts block ───────────────────────────────────────────────────
    The scannable summary under the hero. A markdown table would need a
-   header row that has nothing to say, so this is a definition list. */
+   header row that has nothing to say, so this is a definition list.
+
+   Hextra spaces consecutive children inside .content, and that margin
+   lands on grid items too — which pushed every label below its value.
+   Reset it here rather than fighting it per-property. */
 
 .content .facts {
   display: grid;
   grid-template-columns: 7rem 1fr;
-  gap: 0.5rem 1.25rem;
+  gap: 0.55rem 1.25rem;
   margin: 2rem 0;
   padding: 1.25rem 1.5rem;
   border: 1px solid rgb(0 0 0 / 0.1);
@@ -110,16 +114,23 @@
 }
 .dark .content .facts { border-color: rgb(255 255 255 / 0.12); }
 
+.content .facts dt,
+.content .facts dd {
+  margin: 0;
+  padding: 0;
+  align-self: start;
+}
+
 .content .facts dt {
   font-weight: 600;
-  opacity: 0.65;
-  font-size: 0.8125rem;
+  opacity: 0.6;
+  font-size: 0.75rem;
+  line-height: 1.65;      /* match the dd's first line box */
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  align-self: start;   /* keep the label level with the first line of its value */
-  padding-top: 0.2rem;
+  letter-spacing: 0.05em;
 }
-.content .facts dd { margin: 0; }
+
+.content .facts dd { line-height: 1.5; }
 
 @media (max-width: 32rem) {
   .content .facts { grid-template-columns: 1fr; gap: 0.15rem; }
